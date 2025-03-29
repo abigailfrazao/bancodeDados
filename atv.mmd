@@ -1,0 +1,41 @@
+erDiagram
+    ALUNO {
+        INT Matricula PK
+        VARCHAR Nome
+        VARCHAR Curso
+        VARCHAR Email
+    }
+
+    LIVRO {
+        INT ID_Livro PK
+        VARCHAR Titulo
+        VARCHAR Autor
+        VARCHAR Categoria
+        INT Numero_de_Copias
+    }
+
+    FUNCIONARIO {
+        INT ID_Funcionario PK
+        VARCHAR Nome
+        VARCHAR Cargo
+    }
+
+    EMPRESTIMO {
+        INT ID_Emprestimo PK
+        INT Matricula_Aluno FK
+        INT ID_Funcionario FK
+        DATE Data_Emprestimo
+        DATE Data_Devolucao_Prevista
+        DATE Data_Devolucao_Real
+    }
+
+    ITENS_EMPRESTIMO {
+        INT ID_Itens_Emprestimo PK
+        INT ID_Emprestimo FK
+        INT ID_Livro FK
+    }
+
+    ALUNO ||--o{ EMPRESTIMO : "realiza"
+    FUNCIONARIO ||--o{ EMPRESTIMO : "registra"
+    EMPRESTIMO ||--o{ ITENS_EMPRESTIMO : "contém"
+    LIVRO ||--o{ ITENS_EMPRESTIMO : "é emprestado em"
